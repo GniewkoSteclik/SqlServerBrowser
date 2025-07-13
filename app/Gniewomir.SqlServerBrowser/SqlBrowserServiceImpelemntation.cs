@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace SqlServerBrowser;
+namespace Gniewomir.SqlServerBrowser;
 
 public class Browser
 {

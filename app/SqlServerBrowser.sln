@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerBrowser", "SqlServerBrowser\SqlServerBrowser.csproj", "{E108EE2F-5814-4CF5-A45C-01B739C2D74F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gniewomir.SqlServerBrowser", "Gniewomir.SqlServerBrowser\Gniewomir.SqlServerBrowser.csproj", "{E108EE2F-5814-4CF5-A45C-01B739C2D74F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

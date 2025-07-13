@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace SqlServerBrowser;
+namespace Gniewomir.SqlServerBrowser;
 
 public static class AdressUtils
 {
