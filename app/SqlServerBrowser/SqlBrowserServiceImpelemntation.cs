@@ -1,0 +1,64 @@
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
+namespace SqlServerBrowser;
+
+public class Browser
+{
+    public static Task<string[]> QueryServerInstances(string host, int timeoutms)
+    {
+        return Task.Run(() =>
+        {
+            using var client = new UdpClient();
+            client.EnableBroadcast = true;
+            client.Client.ReceiveTimeout = timeoutms;
+
+            byte[] request = { 0x02 };
+
+            var hostAddress = Dns.GetHostAddresses(host)
+                .Where(a => a.AddressFamily == AddressFamily.InterNetwork)
+                .ToArray();
+
+            var endpoint = new IPEndPoint(hostAddress[0], 1434);
+            client.Send(request, request.Length, endpoint);
+
+            var instances = new List<string>();
+            var start = DateTime.Now;
+            while ((DateTime.Now - start).TotalMilliseconds < timeoutms)
+                try
+                {
+                    var remoteEP = new IPEndPoint(IPAddress.Any, 0);
+                    var response = client.Receive(ref remoteEP);
+                    var result = Encoding.ASCII.GetString(response, 3, response.Length - 3);
+
+                    var fields = result.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+
+                    string? serverName = null;
+                    string? instanceName = null;
+
+                    for (var i = 0; i < fields.Length - 1; i++)
+                    {
+                        if (fields[i] == "ServerName")
+                            serverName = fields[i + 1];
+                        else if (fields[i] == "InstanceName")
+                            instanceName = fields[i + 1];
+
+                        if (serverName != null && instanceName != null)
+                        {
+                            instances.Add($"{serverName}\\{instanceName}");
+                            serverName = null;
+                            instanceName = null;
+                        }
+                    }
+                }
+                catch (SocketException)
+                {
+                    //TODO: handle this exception
+                }
+
+            return instances.Distinct().ToArray();
+        });
+    }
+}

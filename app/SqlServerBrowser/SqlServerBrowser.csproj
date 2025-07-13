@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <IncludeSource>false</IncludeSource>
+        <IncludeSymbols>true</IncludeSymbols>
+
+        <PackageProjectUrl>https://github.com/GniewkoSteclik/SqlServerBrowser</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/GniewkoSteclik/SqlServerBrowser</RepositoryUrl>
+
+        <AssemblyVersion>1.25.0713.1</AssemblyVersion>
+        <FileVersion>1.25.0713.1</FileVersion>
+        <Version>1.25.0713.1</Version>
+        <AssemblyFileVersion>1.25.0713.1</AssemblyFileVersion>
+
+        <Copyright>Copyright © Gniewomir Stęclik 2025</Copyright>
+        <Authors>Gniewomir Stęclik</Authors>
+
+        <PackageTags>C#, SQL Server</PackageTags>
+        <Title>Searching sql servers</Title>
+
+        <ProjectGuid>F9934E6C-674E-451E-99A3-819C57A85C12</ProjectGuid>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+</Project>
