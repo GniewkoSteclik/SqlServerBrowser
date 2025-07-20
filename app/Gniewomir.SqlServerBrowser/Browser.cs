@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Net.NetworkInformation;
 
 namespace Gniewomir.SqlServerBrowser;
 
@@ -60,5 +61,36 @@ public class Browser
 
             return instances.Distinct().ToArray();
         });
+    }
+    public static async Task<List<string>> GetServerList(int timeoutms)
+    {
+        var lista = new List<string>();
+        foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            if (ni.OperationalStatus != OperationalStatus.Up)
+                continue;
+
+            var ipProps = ni.GetIPProperties();
+
+            
+            
+            foreach (var unicast in ipProps.UnicastAddresses)
+            {
+                if (unicast.Address.AddressFamily != AddressFamily.InterNetwork)
+                    continue;
+
+                var ip = unicast.Address;
+                var mask = unicast.IPv4Mask;
+                if (mask == null) continue;
+
+                var broadcast = AdressUtils.GetBroadcastAddress(ip, mask);
+                var x = await Browser.QueryServerInstances(broadcast.ToString(), timeoutms);
+                lista.AddRange(x);
+            }
+             
+        }
+
+        return lista.Distinct().ToList();
+        
     }
 }

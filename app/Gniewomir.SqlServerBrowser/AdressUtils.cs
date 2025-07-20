@@ -4,7 +4,7 @@ namespace Gniewomir.SqlServerBrowser;
 
 public static class AdressUtils
 {
-    private static IPAddress 
+    public static IPAddress 
         GetBroadcastAddress(IPAddress address, IPAddress subnetMask)
     {
         var ipBytes = address.GetAddressBytes();
