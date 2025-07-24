@@ -62,18 +62,34 @@ public class Browser
             return instances.Distinct().ToArray();
         });
     }
-    public static async Task<List<string>> GetServerList(int timeoutms)
+    
+    
+    
+    public async Task<List<string>> GetServerList()
     {
+        var tasks = GetAdressesToScan().Select(a =>
+        {
+            return Browser.QueryServerInstances(a, 2000);
+
+        }).ToArray();
+        await Task.WhenAll(tasks);
         var lista = new List<string>();
+        foreach (var task in tasks)
+        {
+            lista.AddRange(task.Result);
+        }
+        return lista.Distinct().ToList();
+
+    }
+    
+    public IEnumerable<string> GetAdressesToScan()
+    {
         foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
         {
             if (ni.OperationalStatus != OperationalStatus.Up)
                 continue;
 
             var ipProps = ni.GetIPProperties();
-
-            
-            
             foreach (var unicast in ipProps.UnicastAddresses)
             {
                 if (unicast.Address.AddressFamily != AddressFamily.InterNetwork)
@@ -84,13 +100,11 @@ public class Browser
                 if (mask == null) continue;
 
                 var broadcast = AdressUtils.GetBroadcastAddress(ip, mask);
-                var x = await Browser.QueryServerInstances(broadcast.ToString(), timeoutms);
-                lista.AddRange(x);
+                yield return broadcast.ToString();
             }
-             
         }
-
-        return lista.Distinct().ToList();
-        
     }
+    
+    
+    
 }

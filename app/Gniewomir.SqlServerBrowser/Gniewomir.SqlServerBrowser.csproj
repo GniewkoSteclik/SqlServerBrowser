@@ -16,10 +16,10 @@
         <PackageProjectUrl>https://github.com/GniewkoSteclik/SqlServerBrowser</PackageProjectUrl>
         <RepositoryUrl>https://github.com/GniewkoSteclik/SqlServerBrowser</RepositoryUrl>
 
-        <AssemblyVersion>1.25.0720.2</AssemblyVersion>
-        <FileVersion>1.25.0720.2</FileVersion>
-        <Version>1.25.0720.2</Version>
-        <AssemblyFileVersion>1.25.0720.2</AssemblyFileVersion>
+        <AssemblyVersion>1.25.0724.3</AssemblyVersion>
+        <FileVersion>1.25.0724.3</FileVersion>
+        <Version>1.25.0724.3</Version>
+        <AssemblyFileVersion>1.25.0724.3</AssemblyFileVersion>
 
         <Copyright>Copyright © Gniewomir Stęclik 2025</Copyright>
         <Authors>Gniewomir Stęclik</Authors>
